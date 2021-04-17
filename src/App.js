@@ -17,6 +17,9 @@ import { Switch, Route } from "react-router-dom";
 import Convert from "./Convert";
 import ParentComponent from "./Api";
 
+// Added
+import Admin from './components/admin/Admin'
+
 function App() {
 
   return (
@@ -38,6 +41,7 @@ function App() {
           <Route path="/salesoutlet" component={SalesOutlet} />
           <Route path="/aboutus" component={AboutUs} />
           <Route path="/contactus" component={ContactUs} />
+          <Route path="/admin" component={Admin} />
         </Switch>
       </main>
       <Footer />
