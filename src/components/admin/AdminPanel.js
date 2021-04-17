@@ -34,6 +34,10 @@ const useStyles = makeStyles((theme)=>({
         textDecoration: "none",
         color: "#fafafa",
         transition: "0.5s ease all",
+        fontSize: theme.spacing(1.4),
+        [theme.breakpoints.down('xs')]: {
+            fontSize: theme.spacing(1),
+        },
         '&:hover':{
             color: "#fff96d",
             textDecoration: "none",
