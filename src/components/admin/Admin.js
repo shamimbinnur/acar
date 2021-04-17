@@ -1,11 +1,14 @@
   
 import React from 'react'
 import Login from './Login'
+import AdminPanel from './AdminPanel'
 
-const Admin = () => {
+const Admin = ({isLogedin}) => {
     return (
         <>
-          <Login/>
+            {
+                isLogedin ? <AdminPanel/> : <Login/>
+            }
         </>
     )
 }

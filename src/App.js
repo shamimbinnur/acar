@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import NavbarComp from "./components/navbar/Navbar";
@@ -17,10 +17,13 @@ import { Switch, Route } from "react-router-dom";
 import Convert from "./Convert";
 import ParentComponent from "./Api";
 
+
 // Added
 import Admin from './components/admin/Admin'
 
 function App() {
+
+  const [isLogedin, setisLogedin] = useState(true)
 
   return (
     <div className="App">
@@ -41,7 +44,9 @@ function App() {
           <Route path="/salesoutlet" component={SalesOutlet} />
           <Route path="/aboutus" component={AboutUs} />
           <Route path="/contactus" component={ContactUs} />
-          <Route path="/admin" component={Admin} />
+          <Route>
+            <Admin isLogedin={isLogedin} />
+          </Route>
         </Switch>
       </main>
       <Footer />

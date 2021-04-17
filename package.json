@@ -8,6 +8,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@google-cloud/translate": "^6.1.0",
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.3",
@@ -103,7 +105,6 @@
   },
   "description": "this is a website done for Acar Yatak company                                                                                                                                                                                                                     \r all rights reserved.",
   "main": "index.js",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yamoonz/Acar-Yatak.git"
