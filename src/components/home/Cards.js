@@ -22,25 +22,28 @@ function Cards() {
   };
   return (
     <>
-    <div style={{maxWidth: "600px", margin: "0 auto"}}>
-
-      <Carousel style={{width: "100%", height: "auto"}}  className="carousel">
-        <Carousel.Item style={{width: "100%", height: "auto"}} interval={2000}>
-          <img style={{width: "100%", height: "auto"}}
+    <div className='CarouselWraper'>
+      <Carousel className="carousel">
+        <Carousel.Item interval={2000}>
+          <img
+            style={{width: "100%", height: "auto"}}
+            className='carouselImg'
             className="d-block mx-auto"
             src="https://i.imgur.com/4kZFFp9.png"
             alt="First slide"
           />
         </Carousel.Item>
-        <Carousel.Item style={{width: "100%", height: "auto"}} interval={2000}>
-          <img style={{width: "100%", height: "auto"}}
+        <Carousel.Item  interval={2000}>
+          <img
+            style={{width: "100%", height: "auto"}}
             className="d-block mx-auto"
             src="https://i.imgur.com/BuNGcJI.png"
             alt="Second slide"
           />
         </Carousel.Item>
-        <Carousel.Item style={{width: "100%", height: "auto"}} interval={2000}>
-          <img style={{width: "100%", height: "auto"}}
+        <Carousel.Item interval={2000}>
+          <img
+            style={{width: "100%", height: "auto"}}
             className="d-block mx-auto"
             src="https://i.imgur.com/UDBoRJn.png"
             alt="Third slide"
