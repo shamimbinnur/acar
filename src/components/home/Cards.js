@@ -4,22 +4,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
 import { React, useState } from "react";
 import "./Cards.css";
-import Axios from "axios";
-import cors from "cors";
 import { data } from "jquery";
 
 function Cards() {
-  const [sliders, setSliders] = useState("");
 
-  var cors = require("cors");
-
-  const getSliders = () => {
-    Axios.get("http://yaman.omranhallak.com.tr/api/sliders.php").then(
-      (response) => {
-        setSliders(data.setup + " ... " + data.punchline);
-      }
-    );
-  };
   return (
     <>
     <div className='CarouselWraper'>

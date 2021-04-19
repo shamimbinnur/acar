@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import NavbarComp from "./components/navbar/Navbar";
@@ -15,21 +15,28 @@ import Bunks from "./components/dropdown/Bunks";
 import Linens from "./components/dropdown/Linens";
 import { Switch, Route } from "react-router-dom";
 import Convert from "./Convert";
-import ParentComponent from "./Api";
+// import ParentComponent from "./Api";
 
 
 // Added
 import Admin from './components/admin/Admin'
+import axios from 'axios'
 
 function App() {
 
-  const [isLogedin, setisLogedin] = useState(true)
+
+  useEffect(() => {
+
+  },[])
+
+  
+
 
   return (
     <div className="App">
       <NavbarComp />
       <Convert />
-<ParentComponent/>
+      {/* <ParentComponent/> */}
       <main>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -45,7 +52,7 @@ function App() {
           <Route path="/aboutus" component={AboutUs} />
           <Route path="/contactus" component={ContactUs} />
           <Route>
-            <Admin isLogedin={isLogedin} />
+            <Admin />
           </Route>
         </Switch>
       </main>

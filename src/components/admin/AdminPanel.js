@@ -1,9 +1,11 @@
 import React from 'react'
 import { Container, Grid, Button, AppBar, Toolbar, makeStyles, IconButton, Typography} from '@material-ui/core'
-import { AddCircleOutline, List, Person } from '@material-ui/icons'
+import { AddCircleOutline, ExitToApp, List, Person } from '@material-ui/icons'
 import AdminSettings from './AdminSetttigns'
 import AllProduct from './AllProducts'
 import AddProduct from './AddProduct';
+import { useHistory } from 'react-router-dom'
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -14,6 +16,7 @@ import {
 const useStyles = makeStyles((theme)=>({
     appbar:{
         backgroundColor: "#2c2e83",
+        zIndex: 1
         
     },
     toolbar:{
@@ -48,6 +51,12 @@ const useStyles = makeStyles((theme)=>({
 const AdminPanel = ()=> {
 
     const classes = useStyles()
+    const history = useHistory()
+
+    const handleLogout = () => {
+        localStorage.removeItem("auth_token");
+        window.location.reload();
+    }
 
     return (
         <div>
@@ -57,26 +66,37 @@ const AdminPanel = ()=> {
                         <Button
                         color="primary"
                         className={classes.button}
-                        startIcon={<AddCircleOutline>send</AddCircleOutline>}
+                        startIcon={<AddCircleOutline/>}
                         >
                             <Link to='/admin/add' className={classes.link}> Add Product </Link>
                         </Button>
                         <Button
                         color="primary"
                         className={classes.button}
-                        startIcon={<List>send</List>}
+                        startIcon={<List/>}
                         >
                             <Link to='/admin/products' className={classes.link}> All Products</Link>
                         </Button>
-                    </div>
-                    
-                    <Button
+
+                        <Button
                     color="primary"
                     className={classes.adminButton}
                     startIcon={<Person>send</Person>}
                     >
                         <Link to='/admin/settings' className={classes.link}> Admin Settings</Link>
                     </Button>
+                    </div>
+                    
+
+                    <Button
+                    onClick={handleLogout }
+                    color="primary"
+                    className={classes.adminButton}
+                    startIcon={<ExitToApp>send</ExitToApp>}
+                    >
+                        Logout
+                    </Button>
+
                 </Toolbar>
             </AppBar>
 

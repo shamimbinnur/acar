@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 // import useStyles from './useStylesLogin';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios'
 
 import {
     BrowserRouter as Router,
@@ -53,6 +54,34 @@ const useStyles = makeStyles((theme) => ({
 
 const AdminLogin= ()=> {
     const classes = useStyles();
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [response, setResponse] = useState("")
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      login();
+    }
+
+    useEffect(() => {
+    },[])
+
+    const login = async() =>{
+      const data  = {
+        username : username,
+        password: password,
+      }
+      const fetchedData = await axios.post('http://localhost:5000/login', data)
+      console.log(fetchedData.data.token)
+      if(fetchedData.data.token){
+        localStorage.setItem('auth_token', fetchedData.data.token)
+        console.log(localStorage.getItem('auth_token'))
+        setResponse(fetchedData.data.message)
+        window.location.reload();
+      }else{
+        setResponse(fetchedData.data.message)
+      }
+    }
 
     return(
         <Container className={classes.container} component="main" maxWidth="xs">
@@ -61,33 +90,31 @@ const AdminLogin= ()=> {
             <Typography className={classes.signIn} style={{fontSize:"30px"}} component="h1" variant="h5">
               Sign in
             </Typography>
-            <form className={classes.form} noValidate>
+            <form onSubmit={handleSubmit} className={classes.form} noValidate>
               <TextField
+                onChange={(e)=> setUsername(e.target.value)}
+                value={username}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
                 id="email"
                 label="username"
-                name="username"
-                autoComplete="username"
                 autoFocus
               />
               <TextField
+                onChange={(e)=> setPassword(e.target.value)}
+                value={password}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
-                name="password"
                 label="Password"
                 type="password"
-                id="password"
-                autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+              <Typography>
+                {response}
+              </Typography>
               <Button
                 type="submit"
                 fullWidth
