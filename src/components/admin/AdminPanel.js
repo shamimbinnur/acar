@@ -4,6 +4,7 @@ import { AddCircleOutline, ExitToApp, List, Person } from '@material-ui/icons'
 import AdminSettings from './AdminSetttigns'
 import AllProduct from './AllProducts'
 import AddProduct from './AddProduct';
+import Sliders from './Sliders';
 import { useHistory } from 'react-router-dom'
 
 import {
@@ -70,6 +71,7 @@ const AdminPanel = ()=> {
                         >
                             <Link to='/admin/add' className={classes.link}> Add Product </Link>
                         </Button>
+
                         <Button
                         color="primary"
                         className={classes.button}
@@ -79,12 +81,20 @@ const AdminPanel = ()=> {
                         </Button>
 
                         <Button
-                    color="primary"
-                    className={classes.adminButton}
-                    startIcon={<Person>send</Person>}
-                    >
+                        color="primary"
+                        className={classes.button}
+                        startIcon={<List/>}
+                        >
+                            <Link to='/admin/sliders' className={classes.link}> Sliders </Link>
+                        </Button>
+
+                        <Button
+                        color="primary"
+                        className={classes.adminButton}
+                        startIcon={<Person>send</Person>}
+                        >
                         <Link to='/admin/settings' className={classes.link}> Admin Settings</Link>
-                    </Button>
+                        </Button>
                     </div>
                     
 
@@ -106,12 +116,19 @@ const AdminPanel = ()=> {
                         <Route path='/admin/add'>
                             <AddProduct/>
                         </Route>
+
                         <Route path='/admin/settings'>
                             <AdminSettings/>
                         </Route>
+
                         <Route path='/admin/products' >
                             <AllProduct/>
                         </Route>
+
+                        <Route path='/admin/sliders' >
+                            <Sliders/>
+                        </Route>
+
                     </Switch>
                 </div>
             </Container>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Typography, MenuItem, Button, FormControl, InputLabel, Input, TextField, makeStyles, InputAdornment } from '@material-ui/core'
+import { Container, Typography, MenuItem, LinearProgress, Button, FormControl, InputLabel, Input, TextField, makeStyles, InputAdornment, Grid } from '@material-ui/core'
 import axios from 'axios'
 import e from 'cors'
 import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider'
@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme)=>({
         margin: theme.spacing(2, 0.5)
     },
     title:{
-        marginBottom: theme.spacing(5)
+        marginBottom: theme.spacing(5),
+        fontSize: theme.spacing(4)
     }
 }))
 
@@ -36,54 +37,116 @@ const AddProduct = () => {
     const [category, setCategory] = useState('')
     const [price, setPrice] = useState(0)
     const [offerPrice, setofferPrice] = useState(0)
-
-    
-    
-
+    const [responseMessage, setresponseMessage] = useState("")
     
 
-    const handleSubmit = (e)=> {
+    const handleSubmitProduct = (e)=> {
         e.preventDefault()
         upLoad();
     }
+    
+    const handleSubmitSliders = (e)=> {
+        e.preventDefault()
+        upLoadSliders();
+    }
 
     const upLoad = async() => {
-        console.log(imageFile)
         const formData = new FormData();
-        formData.append('image', imageFile);
+        formData.append('image', imageFile)
+        formData.append('name', name);
+        formData.append('category', category);
+        formData.append('price', price);
+        formData.append('offerPrice', offerPrice);
 
-
-        const config = {
-            headers :{
-              auth_token : localStorage.getItem("auth_token"),
-              'Content-Type': 'multipart/form-data'
-            },
-            onUploadProgress: progressEvent => {
-                setuploadProgress(Math.round( (progressEvent.loaded * 100) / progressEvent.total ))
+        try {
+            const config = {
+                headers :{
+                  auth_token : localStorage.getItem("auth_token"),
+                  'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress: progressEvent => {
+                    setuploadProgress(Math.round( (progressEvent.loaded * 100) / progressEvent.total ))
+                }
             }
-        }
+            
+            const {data} = await axios.post("http://localhost:5000/admin/upload", formData, config )
+            console.log(data.message)
+            if(data.message === 'ok'){
+                setresponseMessage("Product added successfully")
+                setName('')
+                setCategory('')
+                setPrice('')
+                setofferPrice('')
+                setImageFile(null)
+                setuploadProgress(0)
+            }
+            if(data == {} ){
+                setresponseMessage("Something went wrong")
+            }
 
-        const data = await axios.post("http://localhost:5000/admin/upload", formData, config )
-        console.log(data)
+        } catch (error) {
+            
+        }
+    }
+
+
+    const upLoadSliders = async() => {
+        const formData = new FormData();
+        formData.append('image', imageFile)
+        formData.append('name', name);
+        formData.append('category', category);
+        formData.append('price', price);
+        formData.append('offerPrice', offerPrice);
+
+        try {
+            const config = {
+                headers :{
+                  auth_token : localStorage.getItem("auth_token"),
+                  'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress: progressEvent => {
+                    setuploadProgress(Math.round( (progressEvent.loaded * 100) / progressEvent.total ))
+                }
+            }
+            
+            const {data} = await axios.post("http://localhost:5000/admin/upload/sliders", formData, config )
+            console.log(data.message)
+            if(data.message === 'ok'){
+                setresponseMessage("Product added successfully")
+                setName('')
+                setCategory('')
+                setPrice('')
+                setofferPrice('')
+                setImageFile(null)
+                setuploadProgress(0)
+            }
+            if(data == {} ){
+                setresponseMessage("Something went wrong")
+            }
+
+        } catch (error) {
+            
+        }
     }
 
     const classes = useStyles();
     return (
         <Container className={classes.root}>
             <div className={classes.formWrapper}>
-                {uploadProgress}
-                <Typography color='textSecondary' className={classes.title}  variant='h4'>
-                    Add Product
+
+                <Typography color='textSecondary' className={classes.title}  variant='h1'>
+                    ADD PRODUCT
                 </Typography>
-                <form className={classes.form} onSubmit={handleSubmit} >
-                    <TextField  className={classes.textField} fullWidth  label="Product name" variant="outlined" />
+                <form className={classes.form} >
+                    <TextField value={name} onChange={(e)=> setName(e.target.value)}  className={classes.textField} fullWidth  label="Product name" variant="outlined" />
                     <TextField
                     className={classes.textField}
                     fullWidth
                     select
                     label="Category"
-                    value="d"
+                    value= {category}
                     variant="outlined"
+                    onChange={(e)=> setCategory(e.target.value)}
                     >
                         <MenuItem value='One person bed'>
                         One person bed
@@ -105,10 +168,26 @@ const AddProduct = () => {
                         </MenuItem>
                         
                     </TextField>
-                    <TextField className={classes.textField} fullWidth  type="number" label="Price" variant="outlined" />
-                    <TextField className={classes.textField} fullWidth  type="number" label="Offer Price" variant="outlined" />
+                    <TextField value={price} onChange={(e)=> setPrice(e.target.value)} className={classes.textField} fullWidth  type="number" label="Price" variant="outlined" />
+                    <TextField value={offerPrice} onChange={(e)=> setofferPrice(e.target.value)} className={classes.textField} fullWidth  type="number" label="Offer Price" variant="outlined" />
                     <Input onChange={ (e)=> setImageFile(e.target.files[0])} className={classes.textField} fullWidth  type="file" placeholder="Photo"  />
-                    <Button type='submit'  className={classes.btn} fullWidth color='primary' variant='contained' >Add product</Button>
+                    <Grid container spacing={2}>
+                        <Grid item>
+                            <Button onClick={handleSubmitProduct} type='submit'  className={classes.btn} fullWidth color='primary' variant='contained' >Add product</Button>
+                        </Grid>
+                        <Grid item>
+                            <Button onClick={handleSubmitSliders} type='submit'  className={classes.btn} fullWidth color='primary' variant='contained' >Add to Sliders</Button>
+                        </Grid>
+                    </Grid>
+                    {
+                        uploadProgress !=0 && uploadProgress !=100 ? 
+                        <div>
+                            <Typography variant='caption1'>Uploading</Typography>
+                            <LinearProgress variant="determinate" value={uploadProgress} valueBuffer={uploadProgress} />
+                        </div> : null
+
+                    }
+                    <Typography variant='caption1'>{responseMessage}</Typography>
                 </form>
             </div>
         </Container>

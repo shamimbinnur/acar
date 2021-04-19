@@ -9,10 +9,11 @@ const useStyles = makeStyles((theme)=>({
     wrapper:{
         display: "flex",
         flexDirection: "column",
-        maxWidth: theme.spacing(200),
+        maxWidth: theme.spacing(100),
         marginTop: theme.spacing(5)
     },
     title:{
+        margin: theme.spacing(5),
         fontSize: theme.spacing(3)
     }
 }))
@@ -23,10 +24,10 @@ const AdminSettings = () => {
     return (
         <Container className={classes.root}>
             <div className={classes.wrapper} >
-                <Typography className={classes.title} gutterBottom variant='h1'>
+                <Typography className={classes.title} color='textSecondary' variant='h1'>
                     Want to change admin password ?
                 </Typography>
-                <Button variant='outlined'>
+                <Button size="small" fullWidth variant='outlined'>
                     Change Password
                 </Button>
             </div>

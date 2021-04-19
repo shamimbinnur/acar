@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme)=> ({
         margin: theme.spacing(5, 0),
 
     },
-    title: {
+    title:{
         margin: theme.spacing(5),
         fontSize: theme.spacing(4)
     }
@@ -24,12 +24,12 @@ const useStyles = makeStyles((theme)=> ({
 }))
 
 
-const AllProducts = () => {
+const Sliders = () => {
     const classes = useStyles();
     return (
         <Container className={classes.root} >
             <Typography color='textSecondary' className={classes.title}  variant='h1'>
-                    ALL PRODUCTS
+                    SLIDERS ITEM
             </Typography>
             <Card className={classes.card}>
                 <TableContainer>
@@ -83,4 +83,4 @@ const AllProducts = () => {
     )
 }
 
-export default AllProducts
+export default Sliders

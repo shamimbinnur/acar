@@ -22,15 +22,21 @@ import Convert from "./Convert";
 import Admin from './components/admin/Admin'
 import axios from 'axios'
 
-function App() {
+const baseUrl = 'http://localhost:5000'
 
+function App() {
+  
+  const [productsData, setProductsData] = useState({})
 
   useEffect(() => {
-
+    getProducts()
+    console.log("apssss")
   },[])
 
-  
-
+  const getProducts = async() =>{
+    const {data} = await axios.get(`${baseUrl}/public/products`)
+    setProductsData(data)
+  }
 
   return (
     <div className="App">
@@ -40,14 +46,34 @@ function App() {
       <main>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/products" component={Products} />
-          <Route path="/OnePersonsBed" component={OnePersonsBed} />
-          <Route path="/TwoPersonsBed" component={TwoPersonsBed} />
-          <Route path="/OnePersonBase" component={OnePersonBase} />
-          <Route path="/TwoPersonBase" component={TwoPersonBase} />
-          <Route path="/Bunks" component={Bunks} />
-          <Route path="/linens" component={Linens} />
-          <Route path="/products" component={Products} />
+
+          <Route path="/products" >
+            <Products />
+          </Route>
+
+          <Route path="/OnePersonsBed">
+            <OnePersonsBed productsData={productsData} />
+          </Route>
+
+          <Route path="/TwoPersonsBed">
+            <TwoPersonsBed productsData={productsData} />
+          </Route>
+
+          <Route path="/OnePersonBase">
+            <OnePersonBase productsData={productsData} />
+          </Route> 
+
+          <Route path="/TwoPersonBase">
+            <TwoPersonBase productsData={productsData} />
+          </Route>
+
+          <Route path="/Bunks"> 
+            <Bunks productsData={productsData} />
+          </Route>
+
+          <Route path="/linens">
+            <Linens productsData={productsData}/>
+          </Route>
           <Route path="/salesoutlet" component={SalesOutlet} />
           <Route path="/aboutus" component={AboutUs} />
           <Route path="/contactus" component={ContactUs} />
