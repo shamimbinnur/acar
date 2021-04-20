@@ -3,8 +3,11 @@ import React, { useState, useEffect } from 'react'
 import Login from './Login'
 import AdminPanel from './AdminPanel'
 import axios from 'axios'
+import useBaseUrl from '../../useBaseUrl'
 
 const Admin = () => {
+
+    const baseUrl = useBaseUrl();
 
     const [ isLogedin, setisLogedin ] = useState(false);
 
@@ -19,7 +22,7 @@ const Admin = () => {
             auth_token : localStorage.getItem("auth_token")
           }
         }
-        const fetchedData = await axios.post('http://localhost:5000/login/verify', {}, config )
+        const fetchedData = await axios.post(`${baseUrl}/login/verify`, {}, config )
         if(fetchedData.data.message === 'true'){
           setisLogedin(true)
         }
