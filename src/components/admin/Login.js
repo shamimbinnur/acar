@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 // import useStyles from './useStylesLogin';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
+import useBaseUrl from '../../useBaseUrl'
 
 import {
     BrowserRouter as Router,
@@ -67,11 +68,12 @@ const AdminLogin= ()=> {
     },[])
 
     const login = async() =>{
+      const baseUrl = useBaseUrl()
       const data  = {
         username : username,
         password: password,
       }
-      const fetchedData = await axios.post('http://localhost:5000/login', data)
+      const fetchedData = await axios.post(`${baseUrl}/login`, data)
       console.log(fetchedData.data.token)
       if(fetchedData.data.token){
         localStorage.setItem('auth_token', fetchedData.data.token)

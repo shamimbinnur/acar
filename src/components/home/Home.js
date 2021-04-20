@@ -44,7 +44,7 @@ function Home({productsData}) {
               </Carousel.Item>
             ))
             
-          ) : 'Loading...'
+          ) : 'loading sliders...'
         }
       </Carousel>
     </div>
@@ -67,7 +67,7 @@ function Home({productsData}) {
             </div>
         </div>
         ))
-        ) : "Loading"
+        ) : "loading..."
       }
     </div>
     </div>
