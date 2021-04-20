@@ -44,7 +44,7 @@ function Home({productsData}) {
               </Carousel.Item>
             ))
             
-          ) : 'loading sliders...'
+          ) : null
         }
       </Carousel>
     </div>
@@ -67,7 +67,7 @@ function Home({productsData}) {
             </div>
         </div>
         ))
-        ) : "loading..."
+        ) : null
       }
     </div>
     </div>

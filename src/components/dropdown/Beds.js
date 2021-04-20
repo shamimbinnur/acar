@@ -22,13 +22,14 @@ function Beds({products}) {
 
   return (
     <>
+    <div style={{margin: "20px"}}>
     <Row>
           {
             productData.data != null ? 
             (
               productData.data.map( item => (
-                <Col xs={12} sm="auto"  md="auto" lg="auto" >
-                <Card style={{ width: "18rem" }}>
+                <Col xs="auto" sm="auto"  md="auto" lg="auto" >
+                <Card style={{ width: "21.8rem" }}>
                   <Card.Img
                     variant="top"
                     src={`${baseUrl}/${item.imageUrl}`}
@@ -50,6 +51,7 @@ function Beds({products}) {
           
 
       </Row>
+      </div>
         
     </>
   );

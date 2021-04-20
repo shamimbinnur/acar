@@ -10,7 +10,7 @@ function TwoPersonBase({productsData}) {
   
   return (
     <>
-    <div>
+    <div style={{margin: "20px"}}>
       <Row>
             {
               productsData.data != null ? 
@@ -18,7 +18,7 @@ function TwoPersonBase({productsData}) {
                 productsData.data.filter( (item)=> item.category === "Two person bed base").
                 map( item => (
                   <Col xs={12} sm="auto"  md="auto" lg="auto">
-                    <Card style={{ width: '15rem' }}>
+                    <Card style={{ width: '21.8rem' }}>
                     <Card.Img variant="top" src= {`${baseUrl}/${item.imageUrl}`}/>
                     <Card.Body>
                       <Card.Title>{item.name}</Card.Title>
