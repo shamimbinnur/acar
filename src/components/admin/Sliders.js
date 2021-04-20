@@ -1,8 +1,10 @@
 import { faFileExport } from '@fortawesome/free-solid-svg-icons';
 import { Button, Card, Container, makeStyles,Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core'
-import React from 'react'
-import TableData from './TableData';
+import React,{useEffect, useState} from 'react'
+import TableDataSliders from './TableDataSliders';
 import TopSection from './TopSection'
+import axios from 'axios'
+import useBaseUrl from '../../useBaseUrl'
 
 const useStyles = makeStyles((theme)=> ({
     root:{
@@ -25,6 +27,21 @@ const useStyles = makeStyles((theme)=> ({
 
 
 const Sliders = () => {
+
+    const baseUrl = useBaseUrl();
+        const [productData, setProductData] = useState({})
+    
+        useEffect(() => {
+            console.log("booom")
+            getAllProducts()
+        },[])
+
+
+        const getAllProducts = async()=> {
+            const {data} = await axios.get(`${baseUrl}/public/sliders`)
+            setProductData(data)
+        }
+
     const classes = useStyles();
     return (
         <Container className={classes.root} >
@@ -74,7 +91,10 @@ const Sliders = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody className= {classes.tblBody}>
-                                <TableData/>
+                            {
+                                productData.data ? ( <TableDataSliders productData={productData} /> ) : null
+                            }
+                                
                         </TableBody>
                     </Table>
                 </TableContainer>

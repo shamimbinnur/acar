@@ -3,6 +3,7 @@ import { Container, Typography, MenuItem, LinearProgress, Button, FormControl, I
 import axios from 'axios'
 import e from 'cors'
 import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider'
+import useBaseUrl from '../../useBaseUrl'
 
 const useStyles = makeStyles((theme)=>({
     root:{
@@ -26,10 +27,19 @@ const useStyles = makeStyles((theme)=>({
     title:{
         marginBottom: theme.spacing(5),
         fontSize: theme.spacing(4)
+    },
+    inputFile:{
+        margin: theme.spacing(0.5),
+        border: "1px solid #c2c2c2",
+        width: "100%",
+        borderRadius: "4px",
+        padding: theme.spacing(0.5),
     }
 }))
 
 const AddProduct = () => {
+
+    const baseUrl = useBaseUrl()
 
     const [imageFile, setImageFile] = useState('')
     const [uploadProgress, setuploadProgress] = useState(0)
@@ -49,6 +59,9 @@ const AddProduct = () => {
     const handleSubmitSliders = (e)=> {
         e.preventDefault()
         upLoadSliders();
+    }
+    const inputFileHander = (e) =>{
+        setImageFile(e.target.files[0])
     }
 
     const upLoad = async() => {
@@ -72,7 +85,8 @@ const AddProduct = () => {
                 }
             }
             
-            const {data} = await axios.post("http://localhost:5000/admin/upload", formData, config )
+            const {data} = await axios.post(`${baseUrl}/admin/upload`, formData, config )
+            
             if(data.message === 'ok'){
                 setresponseMessage("Product added successfully")
                 setName('')
@@ -142,7 +156,7 @@ const AddProduct = () => {
                 </Typography>
                 <form className={classes.form} >
                     <TextField value={name} onChange={(e)=> setName(e.target.value)}  className={classes.textField} fullWidth  label="Product name" variant="outlined" />
-                    <TextField value={descriptions} onChange={(e)=> setDescriptions(e.target.value)}  className={classes.textField} fullWidth multiline  label="Descriptions" variant="outlined" />
+                    <TextField value={descriptions} onChange={(e)=> setDescriptions(e.target.value)} multiline rows={2} className={classes.textField} fullWidth  label="Descriptions" variant="outlined" />
                     <TextField
                     className={classes.textField}
                     fullWidth
@@ -174,7 +188,8 @@ const AddProduct = () => {
                     </TextField>
                     <TextField value={price} onChange={(e)=> setPrice(e.target.value)} className={classes.textField} fullWidth  type="number" label="Price" variant="outlined" />
                     <TextField value={offerPrice} onChange={(e)=> setofferPrice(e.target.value)} className={classes.textField} fullWidth  type="number" label="Offer Price" variant="outlined" />
-                    <Input onChange={ (e)=> setImageFile(e.target.files[0])} className={classes.textField} fullWidth  type="file" placeholder="Photo"  />
+                    <input onChange={ inputFileHander} className={classes.inputFile}  type="file"  />
+                    
                     <Grid container spacing={2}>
                         <Grid item>
                             <Button onClick={handleSubmitProduct} type='submit'  className={classes.btn} fullWidth color='primary' variant='contained' >Add product</Button>

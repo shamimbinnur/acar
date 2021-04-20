@@ -17,20 +17,22 @@ import { Switch, Route } from "react-router-dom";
 import Convert from "./Convert";
 // import ParentComponent from "./Api";
 
+import useBaseUrl from './useBaseUrl'
+
 
 // Added
 import Admin from './components/admin/Admin'
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:5000'
 
 function App() {
+
+  const baseUrl = useBaseUrl()
   
   const [productsData, setProductsData] = useState({})
 
   useEffect(() => {
     getProducts()
-    console.log("apssss")
   },[])
 
   const getProducts = async() =>{

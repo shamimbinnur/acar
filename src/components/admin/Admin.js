@@ -9,7 +9,6 @@ const Admin = () => {
     const [ isLogedin, setisLogedin ] = useState(false);
 
     useEffect(() => {
-        console.log("booom")
         verificationCheck()
     },[])
 
@@ -21,10 +20,8 @@ const Admin = () => {
           }
         }
         const fetchedData = await axios.post('http://localhost:5000/login/verify', {}, config )
-        console.log(fetchedData.data.message)
         if(fetchedData.data.message === 'true'){
           setisLogedin(true)
-          console.log("rrrrrr")
         }
     }
 

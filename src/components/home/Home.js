@@ -6,10 +6,11 @@ import { React, useState, useEffect } from "react";
 import "./Cards.css";
 import { data } from "jquery";
 import axios from 'axios'
+import useBaseUrl from '../../useBaseUrl'
 
 function Home({productsData}) {
 
-  const baseUrl = 'http://localhost:5000'
+  const baseUrl = useBaseUrl();
   const [slidersData, setSlidersData] = useState({})
   let length;
   let latestThree;

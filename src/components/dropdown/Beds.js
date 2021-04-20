@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import "./Beds.css";
 import axios from 'axios'
+import useBaseUrl from '../../useBaseUrl'
 
 function Beds({products}) {
 
-  const baseUrl = 'http://localhost:5000'
+  const baseUrl = useBaseUrl()
   const [productData, setProductData] = useState({})
 
   useEffect(() => {
@@ -21,34 +22,35 @@ function Beds({products}) {
 
   return (
     <>
-      <div className="col-md-12">
-        <div class="card-deck">
+    <Row>
           {
             productData.data != null ? 
             (
               productData.data.map( item => (
-              <Card style={{ width: "18rem" }}>
-                <Card.Img
-                  variant="top"
-                  src={`${baseUrl}/${item.imageUrl}`}
-                />
-                <Card.Body>
-                  <Card.Title>{item.name}</Card.Title>
-                  <Card.Text> {item.descriptions}</Card.Text>
-                  <div className="price">
-                    Price: {item.price} <br />
-                  </div>
-                  Sale: {item.offerPrice}₺
-                </Card.Body>
-              </Card>
-            ))
-            ) : "Loading"
-           
-          }
+                <Col xs={12} sm="auto"  md="auto" lg="auto" >
+                <Card style={{ width: "18rem" }}>
+                  <Card.Img
+                    variant="top"
+                    src={`${baseUrl}/${item.imageUrl}`}
+                  />
+                  <Card.Body>
+                    <Card.Title>{item.name}</Card.Title>
+                    <Card.Text> {item.descriptions}</Card.Text>
+                    <div className="price">
+                      Price: {item.price} <br />
+                    </div>
+                    Sale: {item.offerPrice}₺
+                  </Card.Body>
+                </Card>
+              </Col>
+              ))
+              ) : "Loading"
+              
+            }
           
+
+      </Row>
         
-        </div>
-      </div>
     </>
   );
 }

@@ -22,7 +22,6 @@ const TableData = ({productData})=> {
     const baseUrl = useBaseUrl()
 
     useEffect(() => {
-        setData(productData)
 
     },[])
 
