@@ -1,178 +1,41 @@
-import React from 'react';
-import{Card} from 'react-bootstrap';
+import React, {useEffect, useState} from "react";
+import { Card } from "react-bootstrap";
 
-const TwoPersonsBed = () => {
+const baseUrl = 'http://localhost:5000'
+
+
+const TwoPersonsBed = ({productsData}) => {
     return (
-<>
-       <div className="col-md-12">
-        <div class="card-deck img-fluid">
-        <Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/BU6tnR4.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>BAMBOO </Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-<Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/dsyPrC0.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>EKO JAKAR 03 </Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-<Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/VrSjWFy.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>ELMAS 01 </Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-<Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/9lFGqQv.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>ELMAS 02 </Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-</div>
-</div>
-<div className="col-md-12">
-        <div class="card-deck img-fluid">
-        <Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/cZygJSx.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>GARNET 01</Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-<Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/UMpBEOP.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>GARNET 02 </Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-<Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/lxCXMfD.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>PIRLANTA 01 </Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-<Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/TPXTpKk.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>PIRLANTA 02 </Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-</div>
-</div>
-<div className="col-md-12">
-        <div class="card-deck img-fluid">
-        <Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/hE4aNp0.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>SAFİR 01</Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-<Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/UVhWrAr.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>SAFİR 02 </Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-<Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/lLVp69m.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>VİSKO </Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-<Card style={{ width: '10rem' }}>
-  <Card.Img variant="top" src="https://i.imgur.com/v7D0r6B.jpg/100px180" />
-  <Card.Body>
-    <Card.Title>YUVARLAK</Card.Title>
-    <Card.Text>
-      Only mattress 
-    </Card.Text>
-    <div className="price">
-   Price: 2,400₺ <br/>
-   </div>
-   Sale%: 2,200₺
-  </Card.Body>
-</Card>
-</div>
-</div>
-  </>
+      <>
+        <div>
+          <div className="col-md-12">
+              <div class="card-deck img-fluid">
+                {
+                  productsData.data != null ? 
+                  (
+                    productsData.data.filter( (item)=> item.category === "Two person bed").
+                    map( item => (
+                      <Card style={{ width: '10rem' }}>
+                      <Card.Img variant="top" src= {`${baseUrl}/${item.imageUrl}`}/>
+                      <Card.Body>
+                        <Card.Title>{item.name}</Card.Title>
+                        <Card.Text>
+                          {item.descriptions}
+                        </Card.Text>
+                        <div className="price">
+                          {item.price} <br/>
+                        </div>
+                        Sale%: {item.offerPrice}
+                      </Card.Body>
+                      </Card>
+                    ))
+                  ) : "Loading"
+                }
+              
+              </div>
+          </div>
+        </div>
+      </>
     )
 }
 

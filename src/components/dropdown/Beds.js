@@ -34,7 +34,7 @@ function Beds({products}) {
                 />
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>
-                  <Card.Text> {item.category}</Card.Text>
+                  <Card.Text> {item.descriptions}</Card.Text>
                   <div className="price">
                     Price: {item.price} <br />
                   </div>

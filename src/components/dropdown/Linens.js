@@ -26,7 +26,7 @@ function Linens({productsData}) {
                       <Card.Body>
                         <Card.Title>{item.name}</Card.Title>
                         <Card.Text>
-                          {item.category}
+                          {item.descriptions}
                         </Card.Text>
                         <div className="price">
                           {item.price} <br/>

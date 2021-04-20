@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import Beds from "./Beds";
 
 function Products() {
+
   return (
     <div>
       <Beds />

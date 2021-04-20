@@ -38,6 +38,7 @@ const AddProduct = () => {
     const [price, setPrice] = useState(0)
     const [offerPrice, setofferPrice] = useState(0)
     const [responseMessage, setresponseMessage] = useState("")
+    const [ descriptions, setDescriptions ] = useState("")
     
 
     const handleSubmitProduct = (e)=> {
@@ -51,12 +52,14 @@ const AddProduct = () => {
     }
 
     const upLoad = async() => {
+        setresponseMessage('')
         const formData = new FormData();
         formData.append('image', imageFile)
         formData.append('name', name);
         formData.append('category', category);
         formData.append('price', price);
         formData.append('offerPrice', offerPrice);
+        formData.append('descriptions', descriptions);
 
         try {
             const config = {
@@ -70,7 +73,6 @@ const AddProduct = () => {
             }
             
             const {data} = await axios.post("http://localhost:5000/admin/upload", formData, config )
-            console.log(data.message)
             if(data.message === 'ok'){
                 setresponseMessage("Product added successfully")
                 setName('')
@@ -79,24 +81,25 @@ const AddProduct = () => {
                 setofferPrice('')
                 setImageFile(null)
                 setuploadProgress(0)
-            }
-            if(data == {} ){
-                setresponseMessage("Something went wrong")
+                setDescriptions('')
             }
 
+
         } catch (error) {
-            
+            console.log(error)
         }
     }
 
 
     const upLoadSliders = async() => {
+        setresponseMessage('')
         const formData = new FormData();
         formData.append('image', imageFile)
         formData.append('name', name);
         formData.append('category', category);
         formData.append('price', price);
         formData.append('offerPrice', offerPrice);
+        formData.append('descriptions', descriptions);
 
         try {
             const config = {
@@ -110,7 +113,6 @@ const AddProduct = () => {
             }
             
             const {data} = await axios.post("http://localhost:5000/admin/upload/sliders", formData, config )
-            console.log(data.message)
             if(data.message === 'ok'){
                 setresponseMessage("Product added successfully")
                 setName('')
@@ -119,6 +121,7 @@ const AddProduct = () => {
                 setofferPrice('')
                 setImageFile(null)
                 setuploadProgress(0)
+                setDescriptions('')
             }
             if(data == {} ){
                 setresponseMessage("Something went wrong")
@@ -139,6 +142,7 @@ const AddProduct = () => {
                 </Typography>
                 <form className={classes.form} >
                     <TextField value={name} onChange={(e)=> setName(e.target.value)}  className={classes.textField} fullWidth  label="Product name" variant="outlined" />
+                    <TextField value={descriptions} onChange={(e)=> setDescriptions(e.target.value)}  className={classes.textField} fullWidth multiline  label="Descriptions" variant="outlined" />
                     <TextField
                     className={classes.textField}
                     fullWidth

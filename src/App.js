@@ -45,7 +45,9 @@ function App() {
       {/* <ParentComponent/> */}
       <main>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route exact path='/'>
+            <Home productsData={productsData} />  
+          </Route>
 
           <Route path="/products" >
             <Products />
