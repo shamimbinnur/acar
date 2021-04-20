@@ -23,7 +23,7 @@ const OnePersonsBed = ({productsData}) => {
                   (
                     productsData.data.filter( (item)=> item.category === "One person bed").
                     map( item => (
-                      <Col>
+                      <Col xs={12} sm="auto"  md="auto" lg="auto" >
                       <Card style={{ width: '15rem' }}>
                       <Card.Img variant="top" src= {`${baseUrl}/${item.imageUrl}`}/>
                       <Card.Body>

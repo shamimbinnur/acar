@@ -23,20 +23,20 @@ function OnePersonBase({productsData}) {
                   (
                     productsData.data.filter( (item)=> item.category === "One person bed base").
                     map( item => (
-                      <Col>
-                      <Card style={{ width: '15rem' }}>
-                      <Card.Img variant="top" src= {`${baseUrl}/${item.imageUrl}`}/>
-                      <Card.Body>
-                        <Card.Title>{item.name}</Card.Title>
-                        <Card.Text>
-                          {item.descriptions}
-                        </Card.Text>
-                        <div className="price">
-                          {item.price} <br/>
-                        </div>
-                        Sale%: {item.offerPrice}
-                      </Card.Body>
-                      </Card>
+                      <Col xs={12} sm="auto"  md="auto" lg="auto" >
+                        <Card style={{ width: '15rem' }}>
+                        <Card.Img variant="top" src= {`${baseUrl}/${item.imageUrl}`}/>
+                        <Card.Body>
+                          <Card.Title>{item.name}</Card.Title>
+                          <Card.Text>
+                            {item.descriptions}
+                          </Card.Text>
+                          <div className="price">
+                            {item.price} <br/>
+                          </div>
+                          Sale%: {item.offerPrice}
+                        </Card.Body>
+                        </Card>
                       </Col>
                     ))
                   ) : "Loading"
