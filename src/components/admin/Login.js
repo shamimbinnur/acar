@@ -58,7 +58,8 @@ const AdminLogin= ()=> {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [response, setResponse] = useState("")
-
+    const baseUrl = useBaseUrl()
+    
     const handleSubmit = (e) => {
       e.preventDefault();
       login();
@@ -68,7 +69,6 @@ const AdminLogin= ()=> {
     },[])
 
     const login = async() =>{
-      const baseUrl = useBaseUrl()
       const data  = {
         username : username,
         password: password,
