@@ -1,6 +1,9 @@
 import React,{useState, useEffect} from 'react'
-import { Button, Card, Container, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core'
+import {Card, Container, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from '@material-ui/core'
 import useBaseUrl from '../../useBaseUrl'
+import EditProduct from './EditProduct'
+import { setDefaults } from 'react-i18next'
+import axios from 'axios'
 
 const useStyles = makeStyles((theme)=> ({
     root:{
@@ -17,18 +20,94 @@ const useStyles = makeStyles((theme)=> ({
 
 
 const TableData = ({productData})=> {
-    const [data, setData] = useState()
+
+    const [ open, setOpen ] = useState(false)
+    const [ itemData, setItemData] = useState({})
     const classes = useStyles()
     const baseUrl = useBaseUrl()
 
+    const [id, setId] = useState('')
+    const [name, setName] = useState('')
+    const [descriptions, setDescriptions] = useState('')
+    const [price, setPrice] = useState(0)
+    const [offerPrice, setOfferPrice] = useState(0)
+
     useEffect(() => {
-        setData(productData)
 
     },[])
+
+    const handleEdit = (item)=> {
+        console.log(item)
+        setId(item._id)
+        setName(item.name);
+        setDescriptions(item.descriptions);
+        setPrice(item.price)
+        setOfferPrice(item.offerPrice)
+        setOpen(true);
+        
+        
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleUpdate = ()=> {
+        const data = {
+            name,
+            descriptions,
+            price,
+            offerPrice
+        }
+        updateSingleProduct(id, data)
+        window.location.reload();
+    }
+
+    const handleDelete = () => {
+        try {
+            const config = {
+                headers :{
+                  auth_token : localStorage.getItem("auth_token")
+                }
+              }
+    
+            const response = axios.patch(`${baseUrl}/admin/products/${id}`, {}, config)
+            window.location.reload();
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const updateSingleProduct = async(id, data)=>{       
+            try {
+
+                const payload = {
+                    name : data.name,
+                    descriptions : data.descriptions,
+                    price : data.price,
+                    offerPrice : data.offerPrice
+                }
+
+                const config = {
+                    headers :{
+                      auth_token : localStorage.getItem("auth_token")
+                    }
+                  }
+        
+                const response = axios.put(`${baseUrl}/admin/products/${id}`, payload, config)
+                console.log(response)
+
+            } catch (error) {
+                console.log(error)
+            }
+    }
 
 
     return (
         <>
+       
+            
                 {
                     productData.data && (
                         productData.data.map((item, i) =>(
@@ -65,7 +144,8 @@ const TableData = ({productData})=> {
                                 </div>
                             </TableCell>
                             <TableCell size='small' >
-                                <Button size='small'>
+                                
+                                <Button onClick={ ()=> handleEdit(item) } size='small'>
                                                     Edit
                                 </Button>
                             </TableCell>
@@ -74,6 +154,58 @@ const TableData = ({productData})=> {
                         ))
                     ) 
                 }
+
+
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">{itemData.name}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        To subscribe to this website, please enter your email address here. We will send updates
+                        occasionally.
+                    </DialogContentText>
+                    <TextField
+                        label="Product name"
+                        fullWidth
+                        onChange={ (e)=> setName(e.target.value)}
+                        value={name}
+                    />
+                    <TextField
+                        label="Descriptions"
+                        fullWidth
+                        multiline
+                        row={2}
+                        onChange={ (e)=> setDescriptions(e.target.value)}
+                        value={descriptions}
+                    />
+                    <TextField
+                        label="Price"
+                        fullWidth
+                        type="number"
+                        onChange={ (e)=> setPrice(e.target.value)}
+                        value={price}
+                    />
+                    <TextField
+                        label="Offer price"
+                        type="number"
+                        fullWidth
+                        onChange={ (e)=> setOfferPrice(e.target.value)}
+                        value={offerPrice}
+                    />
+
+
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                    Cancel
+                </Button>
+                <Button color="secondary" onClick={handleDelete} >
+                    Delete
+                </Button>
+                <Button onClick={handleUpdate} color="primary">
+                    Update
+                </Button>
+                </DialogActions>
+            </Dialog>
             
         </>
     )

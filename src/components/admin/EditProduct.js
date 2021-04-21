@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from '@material-ui/core'
 
-const EditProduct = ()=> {
+const EditProduct = ({setOpen, open})=> {
 
-    const [open, setOpen] = useState(false);
+    useEffect(() => {
+
+    }, [])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -12,13 +15,11 @@ const EditProduct = ()=> {
         setOpen(false);
     };
 
+
     return (
         <div>
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-            Open form dialog
-        </Button>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+            <DialogTitle id="form-dialog-title"></DialogTitle>
             <DialogContent>
             <DialogContentText>
                 To subscribe to this website, please enter your email address here. We will send updates
@@ -37,8 +38,11 @@ const EditProduct = ()=> {
             <Button onClick={handleClose} color="primary">
                 Cancel
             </Button>
+            <Button color="secondary" onClick={handleClose} >
+                Delete
+            </Button>
             <Button onClick={handleClose} color="primary">
-                Subscribe
+                Update
             </Button>
             </DialogActions>
         </Dialog>

@@ -126,7 +126,7 @@ const AddProduct = () => {
                 }
             }
             
-            const {data} = await axios.post(`${baseUrl}/admin/upload`, formData, config )
+            const {data} = await axios.post(`${baseUrl}/admin/upload/sliders`, formData, config )
             if(data.message === 'ok'){
                 setresponseMessage("Product added successfully")
                 setName('')

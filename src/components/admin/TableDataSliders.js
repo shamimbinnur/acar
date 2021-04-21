@@ -1,6 +1,8 @@
 import React,{useState, useEffect} from 'react'
 import { Button, Card, Container, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core'
 import useBaseUrl from '../../useBaseUrl'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme)=> ({
     root:{
@@ -20,6 +22,22 @@ const TableData = ({productData})=> {
     const [data, setData] = useState()
     const classes = useStyles()
     const baseUrl = useBaseUrl()
+    const history = useHistory()
+
+    const delSlide = async(id)=> {
+        console.log(id)
+        const config = {
+            headers :{
+              auth_token : localStorage.getItem("auth_token")
+            }
+          }
+
+        const response = axios.patch(`${baseUrl}/admin/sliders/${id}`, {}, config)
+        console.log(response)
+        window.location.reload();
+        
+
+    }
 
     useEffect(() => {
 
@@ -64,9 +82,7 @@ const TableData = ({productData})=> {
                                 </div>
                             </TableCell>
                             <TableCell size='small' >
-                                <Button size='small'>
-                                                    Edit
-                                </Button>
+                                <Button color='secondary' onClick={()=> delSlide(item._id)} size='small'>Delete</Button>
                             </TableCell>
                             </TableRow>
                             </>
