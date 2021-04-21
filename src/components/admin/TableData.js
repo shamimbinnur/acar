@@ -67,7 +67,8 @@ const TableData = ({productData})=> {
         try {
             const config = {
                 headers :{
-                  auth_token : localStorage.getItem("auth_token")
+                  auth_token : localStorage.getItem("auth_token"),
+                  'Content-Type' : 'application/json'
                 }
               }
     
