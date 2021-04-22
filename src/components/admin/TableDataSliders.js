@@ -32,7 +32,7 @@ const TableData = ({productData})=> {
             }
           }
 
-        const response = axios.patch(`${baseUrl}/admin/sliders/${id}`, {}, config)
+        const response = await axios.patch(`${baseUrl}/admin/sliders/${id}`, {}, config)
         console.log(response)
         window.location.reload();
         

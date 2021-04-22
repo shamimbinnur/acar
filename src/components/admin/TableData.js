@@ -51,18 +51,18 @@ const TableData = ({productData})=> {
         setOpen(false);
     };
 
-    const handleUpdate = ()=> {
+    const handleUpdate = async()=> {
         const data = {
             name,
             descriptions,
             price,
             offerPrice
         }
-        updateSingleProduct(id, data)
+        await updateSingleProduct(id, data)
         window.location.reload();
     }
 
-    const handleDelete = () => {
+    const handleDelete = async() => {
         try {
             const config = {
                 headers :{
@@ -71,7 +71,7 @@ const TableData = ({productData})=> {
                 }
               }
     
-            const response = axios.patch(`${baseUrl}/admin/products/${id}`, {}, config)
+            const response = await axios.patch(`${baseUrl}/admin/products/${id}`, {}, config)
             window.location.reload();
 
         } catch (error) {
@@ -95,7 +95,7 @@ const TableData = ({productData})=> {
                     }
                   }
         
-                const response = axios.put(`${baseUrl}/admin/products/${id}`, payload, config)
+                const response = await axios.put(`${baseUrl}/admin/products/${id}`, payload, config)
                 console.log(response)
 
             } catch (error) {

@@ -17,6 +17,7 @@ import Downshift from "downshift";
 function NavBarComponent({productsData}) {
   const history = useHistory()
   const {setSearchData} = useContext(SearchContext)
+  const [tempInput, setTempInput] = useState('')
 
   let data;
   let unique;
@@ -106,7 +107,7 @@ function NavBarComponent({productsData}) {
                 getLabelProps
               }) => (
                 <div>
-                  <input style={{height: "38px", marginRight: "10px", border:"1px solid grey", paddingLeft:"10px", borderRadius: "5px"}} {...getInputProps({ placeholder: "Search items" })} />
+                  <input onChange={(e)=>  setTempInput(e.target.value)} style={{height: "38px", marginRight: "10px", border:"1px solid grey", paddingLeft:"10px", borderRadius: "5px"}} {...getInputProps({ placeholder: "Search items" })} />
                   {isOpen ? (
                     <div className="downshift-dropdown">
                       {items
