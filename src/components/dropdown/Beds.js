@@ -4,7 +4,7 @@ import "./Beds.css";
 import axios from 'axios'
 import useBaseUrl from '../../useBaseUrl'
 
-import { Grid, Button, CardActions, Card,
+import { Grid, Card,
   CardActionArea,
   CardMedia,
   CardContent,
@@ -12,14 +12,25 @@ import { Grid, Button, CardActions, Card,
   makeStyles,
  } from '@material-ui/core'
 
- const useStyles = makeStyles({
+ const useStyles = makeStyles((theme)=>({
+  wrapper:{
+    margin: theme.spacing(0)
+  },
   root: {
-    maxWidth: 345,
+    maxWidth: 310,
+    borderRadius: "2px",
+    marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(3),
+    [theme.breakpoints.down('xs')]: {
+      margin: theme.spacing(1),
+      maxWidth: "100%",
+    },
   },
   media: {
-    height: 140,
+    height: 200,
+    
   },
-});
+}));
 
 function Beds({products}) {
 
@@ -42,49 +53,44 @@ function Beds({products}) {
 
   return (
     <>
-    <Grid container md= {12}>
-          {
-            productData.data != null ? 
-            (
-              productData.data.map( item => (
-                <Grid item>
-                  <Card className={classes.root}>
-                    <CardActionArea>
-                      <CardMedia
-                        className={classes.media}
-                        component="img"
-                        alt="Contemplative Reptile"
-                        height="140"
-                        image={`${baseUrl}/${item.imageUrl}`}
-                        title="Contemplative Reptile"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          Lizard
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                          across all continents except Antarctica
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                      <Button size="small" color="primary">
-                        Share
-                      </Button>
-                      <Button size="small" color="primary">
-                        Learn More
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))
-              ) : "Loading"
-              
-            }
-          
-
-      </Grid>
+    <div className={classes.wrapper}>
+      <Grid container spacing={0} md={12} sm={12} xs={12}  lg= {12}>
+            {
+              productData.data != null ? 
+              (
+                productData.data.map( item => (
+                  <Grid item>
+                    <Card elevation={1} className={classes.root}>
+                      <CardActionArea>
+                        <CardMedia
+                          className={classes.media}
+                          component="img"
+                          alt="Contemplative Reptile"
+                          height="140"
+                          image={`${baseUrl}/${item.imageUrl}`}
+                          title="Contemplative Reptile"
+                        />
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="h2">
+                            {item.name}
+                          </Typography>
+                          <Typography variant="body1" color="textSecondary" component="p">
+                            {item.descriptions}
+                          </Typography>
+                          <Typography variant="body2" color="textSecondary" component="p">
+                            <div style={{textDecoration: "line-through"}} > Price: {item.price}  </div>
+                            <div> Sell: {item.offerPrice}  </div>
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                ))
+                ) : "Loading"
+                
+              }
+        </Grid>
+      </div>
     </>
   );
 }

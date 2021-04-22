@@ -15,6 +15,8 @@ import Bunks from "./components/dropdown/Bunks";
 import Linens from "./components/dropdown/Linens";
 import { Switch, Route } from "react-router-dom";
 import Convert from "./Convert";
+import Search from './components/dropdown/Search';
+
 // import ParentComponent from "./Api";
 
 import useBaseUrl from './useBaseUrl'
@@ -78,6 +80,11 @@ function App() {
           <Route path="/linens">
             <Linens productsData={productsData}/>
           </Route>
+
+          <Route path="/search">
+            <Search productsData={productsData}/>
+          </Route>
+
           <Route path="/salesoutlet" component={SalesOutlet} />
           <Route path="/aboutus" component={AboutUs} />
           <Route path="/contactus" component={ContactUs} />

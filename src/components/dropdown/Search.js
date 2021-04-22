@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
-// import {Card, Row, Col} from 'react-bootstrap';
-import useBaseUrl from '../../useBaseUrl'
+import React from 'react'
+import useBaseUrl from '../../useBaseUrl';
 
 import { Grid, Card,
   CardActionArea,
@@ -31,23 +30,17 @@ import { Grid, Card,
 }));
 
 
-function Linens({productsData}) {
-
-  const baseUrl = useBaseUrl();
-  const classes = useStyles()
-
-  useEffect(() => {
-
-  },[])
-
-  return (
+const Search = ({productsData}) => {
+    const classes = useStyles()
+    const baseUrl = useBaseUrl()
+    return (
         <>
-          <div className={classes.wrapper} >
+         <div className={classes.wrapper} >
             <Grid container spacing={0} md={12} sm={12} xs={12}  lg= {12}>
                   {
                     productsData.data != null ? 
                     (
-                      productsData.data.filter( (item)=> item.category === "Two person bed base").
+                      productsData.data.filter( (item)=> item.category === "One person bed").
                       map( item => (
                         <Grid item>
                           <Card elevation={1} className={classes.root}>
@@ -79,9 +72,9 @@ function Linens({productsData}) {
                     ) : "Loading"
                   }
             </Grid>
-          </div>
+        </div>
         </>
-  )
+    )
 }
 
-export default Linens
+export default Search
