@@ -7,9 +7,17 @@ import {
   FormControl,
 } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
 //import Search from "../navbar/Search";
 function NavBarComponent() {
+  const history = useHistory()
+  
+
+  const handleSearch = () => {
+    history.push('/search')
+  }
+
   return (
     <>
       <Navbar class="p-3 mb-2 bg-light text-white" bg="light" expand="lg">
@@ -57,7 +65,7 @@ function NavBarComponent() {
           <div id="google_translate_element"></div>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-danger">Search</Button>
+            <Button onClick={handleSearch} variant="outline-danger">Search</Button>
           </Form>
         </Navbar.Collapse>
       </Navbar>

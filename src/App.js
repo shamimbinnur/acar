@@ -17,6 +17,7 @@ import { Switch, Route } from "react-router-dom";
 import Convert from "./Convert";
 import Search from './components/dropdown/Search';
 
+import Test from './components/dropdown/Test'
 // import ParentComponent from "./Api";
 
 import useBaseUrl from './useBaseUrl'
@@ -44,7 +45,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavbarComp />
+      <NavbarComp productsData={productsData} />
       <Convert />
       {/* <ParentComponent/> */}
       <main>
@@ -82,7 +83,7 @@ function App() {
           </Route>
 
           <Route path="/search">
-            <Search productsData={productsData}/>
+            <Test productsData={productsData}/>
           </Route>
 
           <Route path="/salesoutlet" component={SalesOutlet} />

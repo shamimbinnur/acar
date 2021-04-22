@@ -1,5 +1,6 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import useBaseUrl from '../../useBaseUrl';
+// import { useCombobox } from 'downshift'
 
 import { Grid, Card,
   CardActionArea,
@@ -8,6 +9,8 @@ import { Grid, Card,
   Typography,
   makeStyles,
  } from '@material-ui/core'
+
+ 
 
  const useStyles = makeStyles((theme)=>({
   wrapper:{
@@ -33,6 +36,27 @@ import { Grid, Card,
 const Search = ({productsData}) => {
     const classes = useStyles()
     const baseUrl = useBaseUrl()
+
+    const [inputItems, setInputItems] = useState('')
+  const [filteredItem, setFilteredItem] = useState('')
+
+  // const { 
+  //   isOpen,
+  //   getMenuProps,
+  //   getInputProps,
+  //   getComboboxProps,
+  //   highLightedIndex,
+  //   getItemProps
+  // } = useCombobox({
+  //    items: inputItems,
+  //    onInputValueChange : ({inputValue}) => {
+  //      setInputItems(
+  //        users.filter((item) => items.name.toLowerCase().startsWith(inputValue.toLowerCase()))
+  //      )
+  //    }
+  // })
+
+
     return (
         <>
          <div className={classes.wrapper} >
