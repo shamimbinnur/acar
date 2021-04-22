@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import {Card, Container, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from '@material-ui/core'
 import useBaseUrl from '../../useBaseUrl'
-import EditProduct from './EditProduct'
 import { setDefaults } from 'react-i18next'
 import axios from 'axios'
 

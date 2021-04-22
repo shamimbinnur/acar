@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, createContext } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import NavbarComp from "./components/navbar/Navbar";
@@ -17,6 +17,7 @@ import { Switch, Route } from "react-router-dom";
 import Convert from "./Convert";
 import Search from './components/dropdown/Search';
 
+import { SearchContext } from './searchContext';
 import Test from './components/dropdown/Test'
 // import ParentComponent from "./Api";
 
@@ -33,6 +34,7 @@ function App() {
   const baseUrl = useBaseUrl()
   
   const [productsData, setProductsData] = useState({})
+  const [searchData, setSearchData] = useState('search')
 
   useEffect(() => {
     getProducts()
@@ -45,6 +47,7 @@ function App() {
 
   return (
     <div className="App">
+      <SearchContext.Provider value={{searchData, setSearchData}} >
       <NavbarComp productsData={productsData} />
       <Convert />
       {/* <ParentComponent/> */}
@@ -83,7 +86,7 @@ function App() {
           </Route>
 
           <Route path="/search">
-            <Test productsData={productsData}/>
+            <Search productsData={productsData}/>
           </Route>
 
           <Route path="/salesoutlet" component={SalesOutlet} />
@@ -95,6 +98,7 @@ function App() {
         </Switch>
       </main>
       <Footer />
+      </SearchContext.Provider>
     </div>
   );
 }

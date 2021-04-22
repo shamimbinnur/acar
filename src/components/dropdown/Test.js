@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Downshift from "downshift";
+
+import { SearchContext } from '../../searchContext';
 
 
 
@@ -11,9 +13,12 @@ const onChange = selectedBook => {
 
 function Test({productsData}) {
 
+    const {searchData}= useContext(SearchContext)
+
     useEffect(() => {
         // const pp = productsData.data.map((item) => ({ name : item.name}))
         // console.log(pp)
+
 
         
     }, [])
@@ -27,6 +32,8 @@ function Test({productsData}) {
 
 
   return (
+    <>
+    <h1>{searchData}</h1>
     <Downshift
       onChange={onChange}
       itemToString={items => (items ? items.name : "")}
@@ -76,6 +83,8 @@ function Test({productsData}) {
         </div>
       )}
     </Downshift>
+    </>
+
   );
 }
 

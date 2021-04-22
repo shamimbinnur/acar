@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import useBaseUrl from '../../useBaseUrl';
 // import { useCombobox } from 'downshift'
 
@@ -10,11 +10,13 @@ import { Grid, Card,
   makeStyles,
  } from '@material-ui/core'
 
+ import { SearchContext } from '../../searchContext'
  
-
+ 
+ 
  const useStyles = makeStyles((theme)=>({
-  wrapper:{
-    margin: theme.spacing(0)
+   wrapper:{
+     margin: theme.spacing(0)
   },
   root: {
     maxWidth: 310,
@@ -34,37 +36,28 @@ import { Grid, Card,
 
 
 const Search = ({productsData}) => {
-    const classes = useStyles()
-    const baseUrl = useBaseUrl()
-
-    const [inputItems, setInputItems] = useState('')
+  const classes = useStyles()
+  const baseUrl = useBaseUrl()
+  
+  const [inputItems, setInputItems] = useState('')
   const [filteredItem, setFilteredItem] = useState('')
+  
+  const {searchData}= useContext(SearchContext)
 
-  // const { 
-  //   isOpen,
-  //   getMenuProps,
-  //   getInputProps,
-  //   getComboboxProps,
-  //   highLightedIndex,
-  //   getItemProps
-  // } = useCombobox({
-  //    items: inputItems,
-  //    onInputValueChange : ({inputValue}) => {
-  //      setInputItems(
-  //        users.filter((item) => items.name.toLowerCase().startsWith(inputValue.toLowerCase()))
-  //      )
-  //    }
-  // })
+  useEffect(() => {
+    console.log(productsData)
+  }, [searchData])
 
 
     return (
         <>
+        <h1>{searchData}</h1>
          <div className={classes.wrapper} >
             <Grid container spacing={0} md={12} sm={12} xs={12}  lg= {12}>
                   {
                     productsData.data != null ? 
                     (
-                      productsData.data.filter( (item)=> item.category === "One person bed").
+                      productsData.data.filter( (item)=> item.name == searchData ).
                       map( item => (
                         <Grid item>
                           <Card elevation={1} className={classes.root}>
