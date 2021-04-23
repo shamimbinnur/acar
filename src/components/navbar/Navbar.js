@@ -30,13 +30,13 @@ function NavBarComponent({productsData}) {
   
 
   useEffect(() => {
+    console.log(tempInput)
     if(productsData.data != null){
       data = productsData.data.map((item) =>  item.name );
       unique = [...new Set(data)];
       fixedObject = unique.map( item =>  ({ name: item }))
       items = fixedObject;
     }
-    console.log(items)
   })
 
   const handleSearch = () => {
@@ -44,7 +44,7 @@ function NavBarComponent({productsData}) {
   }
 
   return (
-    <>
+    <div style={{position: "relative", zIndex: 99999999}}>
       <Navbar class="p-3 mb-2 bg-light text-white" bg="light" expand="lg">
         <Navbar.Brand href="#home">
           <img
@@ -88,7 +88,7 @@ function NavBarComponent({productsData}) {
             <Nav.Link href="contactus">Contact Us</Nav.Link>
           </Nav>
           <div id="google_translate_element"></div>
-          <Form  inline>
+          <Form onSubmit={(e)=> e.preventDefault()}  inline>
             {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
             { productsData.data && (
               <div style={{ maxHeight: "40px" }} >
@@ -107,7 +107,7 @@ function NavBarComponent({productsData}) {
                 getLabelProps
               }) => (
                 <div>
-                  <input onChange={(e)=>  setTempInput(e.target.value)} style={{height: "38px", marginRight: "10px", border:"1px solid grey", paddingLeft:"10px", borderRadius: "5px"}} {...getInputProps({ placeholder: "Search items" })} />
+                  <input style={{height: "38px", marginRight: "10px", border:"1px solid grey", paddingLeft:"10px", borderRadius: "5px"}} {...getInputProps({ placeholder: "Search items" })} />
                   {isOpen ? (
                     <div className="downshift-dropdown">
                       {items
@@ -141,7 +141,7 @@ function NavBarComponent({productsData}) {
           </Form>
         </Navbar.Collapse>
       </Navbar>
-    </>
+    </div>
   );
 }
 

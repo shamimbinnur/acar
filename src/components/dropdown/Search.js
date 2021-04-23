@@ -45,13 +45,12 @@ const Search = ({productsData}) => {
   const {searchData}= useContext(SearchContext)
 
   useEffect(() => {
-    console.log(productsData)
+
   }, [searchData])
 
 
     return (
         <>
-        <h1>{searchData}</h1>
          <div className={classes.wrapper} >
             <Grid container spacing={0} md={12} sm={12} xs={12}  lg= {12}>
                   {
